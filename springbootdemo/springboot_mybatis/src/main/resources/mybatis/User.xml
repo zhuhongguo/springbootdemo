@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.egoint.mapper.UserMapper">
+
+	<resultMap type="com.egoint.model.User" id="UserResultMap">
+		<id property="uid" column="uid" />
+		<result property="name" column="name" />
+		<result property="age" column="age" />
+		<result property="sex" column="sex" />
+		<result property="carid" column="carid" />
+		<result property="phone" column="phone" />
+		<result property="address" column="address" />
+		<result property="money" column="money" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="paypwd" column="paypwd" />
+		<result property="role" column="role" />
+		<result property="icon" column="icon" />
+		<result property="jzpic" column="jzpic" />
+		<result property="jzid" column="jzid" />
+		<result property="jzlssue" column="jzlssue" />
+		<result property="jzvilid" column="jzvilid" />
+		<result property="jztype" column="jztype" />
+		<result property="jzstatus" column="jzstatus" />
+		<result property="jzdrivingid" column="jzdrivingid" />
+		<result property="birthday" column="birthday" />
+		<result property="appkey" column="appkey" />
+		<result property="wechat" column="wechat" />
+		<result property="qq" column="qq" />
+		<result property="alipay" column="alipay" />
+		<result property="weibo" column="weibo" />
+		<result property="status" column="status" />
+		<result property="credit" column="credit" />
+		<result property="email" column="email" />
+	</resultMap>
+	
+	<select id="getUserbyId" parameterType="String" resultType="com.egoint.model.User">
+		select * from tb_user where uid=#{uid}
+	</select>
+		
+	<select id="findUsersByPage" parameterType="com.egoint.form.UserForm" resultMap="UserResultMap">
+		select * from tb_user where 1=1
+		<if test="username!=null and username!=''">
+			and name like '%${username}%'
+		</if>
+		<if test="phone!=null and phone!=''">
+			and phone = #{phone}
+		</if>
+	</select>
+	
+	<select id="countUser" resultType="Int">
+		select count(1) from tb_user where 1=1
+		<if test="username!=null and username!=''">
+			and name like '%${username}%'
+		</if>
+		<if test="phone!=null and phone!=''">
+			and phone = #{phone}
+		</if>
+	</select>
+	
+	<select id ="getUserByUsername" resultType="com.egoint.model.User" parameterType="String">
+		select * from tb_user where username =#{0} or email = #{0} or phone =#{0}
+	</select>
+	
+</mapper>
+
+
+
+
+
+
+

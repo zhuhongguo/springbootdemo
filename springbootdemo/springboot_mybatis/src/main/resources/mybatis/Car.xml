@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.egoint.mapper.CarMapper">
+
+	<resultMap id="CarResultMap" type="com.egoint.model.Car">
+		<id property="cid" column="cid" />
+		<result property="owner" column="owner" />
+		<result property="plate" column="plate" />
+		<result property="color" column="color" />
+		<result property="cartype" column="cartype" />
+		<result property="engine" column="engine" />
+		<result property="vin" column="vin" />
+		<result property="nature" column="nature" />
+		<result property="model" column="model" />
+		<result property="addtime" column="addtime" />
+		<result property="state" column="state" />
+		<result property="picture" column="picture" />
+		<result property="uid" column="uid" />
+	</resultMap>
+	
+	<select id="findCarsByPage" parameterType="com.egoint.form.CarForm" resultMap="CarResultMap">
+		select * from tb_car where 1=1 
+		<if test="plate!=null and plate!=''" >
+		and plate =#{plate}
+		</if>
+	</select>
+		<select id="countCar"  resultType="Integer">
+		select count(1) from tb_car where 1=1 
+		<if test="plate!=null and plate!=''" >
+		and plate =#{plate}
+		</if>
+	</select>
+	
+	
+</mapper>
